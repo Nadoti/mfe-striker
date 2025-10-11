@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  app-main:
+    build:
+      context: ./packages/app-main
+      dockerfile: Dockerfile
+    container_name: app-main
+    ports:
+      - "4000:3000"
+    volumes:
+      - ./packages/app-main:/app
+      - /app/node_modules
+      - /app/.next
+    environment:
+      - NODE_ENV=development
+      - WATCHPACK_POLLING=true
+    networks:
+      - microfront-network
+
+  mfe-login:
+    build:
+      context: ./packages/mfe-login
+      dockerfile: Dockerfile
+    container_name: mfe-login
+    ports:
+      - "4001:3000"
+    volumes:
+      - ./packages/mfe-login:/app
+      - /app/node_modules
+      - /app/.next
+    environment:
+      - NODE_ENV=development
+      - WATCHPACK_POLLING=true
+    networks:
+      - microfront-network
+
+  mfe-register:
+    build:
+      context: ./packages/mfe-register
+      dockerfile: Dockerfile
+    container_name: mfe-register
+    ports:
+      - "4002:3000"
+    volumes:
+      - ./packages/mfe-register:/app
+      - /app/node_modules
+      - /app/.next
+    environment:
+      - NODE_ENV=development
+      - WATCHPACK_POLLING=true
+    networks:
+      - microfront-network
+
+networks:
+  microfront-network:
+    driver: bridge
+
