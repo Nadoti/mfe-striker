@@ -21,7 +21,7 @@ a {
 }
 
 a:hover {
-  color: #3b82f6; /* azul */
+  color: #3b82f6;
 }
 
 button {
@@ -35,7 +35,7 @@ button {
    =============================== */
 .home-container {
   min-height: 100vh;
-  background-color: #111827; /* bg-gray-900 */
+  background-color: #111827;
   color: #ffffff;
   overflow-x: hidden;
 }
