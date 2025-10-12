@@ -1,12 +1,32 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Habilita webpack polling para hot reload no Docker
+  webpack: (config, { dev }) => {
+    if (dev) {
+      config.watchOptions = {
+        poll: 1000,
+        aggregateTimeout: 300,
+      };
+    }
+    return config;
+  },
+  
   async rewrites() {
     // Em produção usa variáveis de ambiente, em dev usa Docker
     const mfeLoginUrl = process.env.MFE_LOGIN_URL || "http://mfe-login:3000";
     const mfeRegisterUrl = process.env.MFE_REGISTER_URL || "http://mfe-register:3000";
+    const mfeHomeUrl = process.env.MFE_HOME_URL || "http://mfe-home:3000";
     
     return [
+      {
+        source: "/home",
+        destination: `${mfeHomeUrl}/home`,
+      },
+      {
+        source: "/home/:path*",
+        destination: `${mfeHomeUrl}/home/:path*`,
+      },
       {
         source: "/login",
         destination: `${mfeLoginUrl}/login`,
