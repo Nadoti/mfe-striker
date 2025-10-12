@@ -1,42 +1,131 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
 * {
-  box-sizing: border-box;
-  padding: 0;
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background-color: #262627;
+  color: #ffffff;
+  line-height: 1.5;
 }
 
 a {
   color: inherit;
   text-decoration: none;
+  transition: color 0.3s ease;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+a:hover {
+  color: #3b82f6; /* azul */
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.3s ease;
+}
+
+body {
+  background-color: #262627;
+  color: #f1f1f1;
+  font-family: "Inter", sans-serif;
+  height: 100vh;
+  padding: 3rem;
+  @media (min-width: 1024px) {
+    padding: 7rem;
   }
+}
+
+.auth-container {
+  text-align: center;
+  width: 100%;
+  @media (min-width: 1024px) {
+  width: 50%;
+  }
+}
+
+.brand {
+  font-size: 2.5rem;
+  background: linear-gradient(
+    90deg,
+    #4f46e5 0%,
+    #c0bef1 50%,
+    #4f46e5 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 2rem;
+}
+
+.auth-box {
+  background-color: #262627;
+  border: 1px solid #4F46E5;
+  border-radius: 10px;
+  margin: auto;
+  padding: 1rem 2rem;
+
+  @media (min-width: 1024px) {
+   padding: 2rem 3rem;
+  }
+}
+
+.auth-title {
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+}
+
+.input-group {
+  margin-bottom: 1rem;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #4F46E5;
+  background: transparent;
+  color: #fff;
+}
+
+.primary-button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  background: #4F46E5;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.primary-button:hover {
+  background: #6a6aff;
+}
+
+.login-link {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.login-link a {
+  color: #4F46E5;
+  text-decoration: none;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.height-100 {
+  height: 100%;
 }
