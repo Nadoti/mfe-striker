@@ -11,16 +11,13 @@ export default function RegisterPage() {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
-    // Simulação de envio — depois você pode conectar com a API real
     if (!name || !email || !password) {
       setMessage("Preencha todos os campos.");
       return;
     }
 
-    // Simulação de sucesso
     setMessage("Conta criada com sucesso! 🚀");
 
-    // Limpa os campos
     setName("");
     setEmail("");
     setPassword("");

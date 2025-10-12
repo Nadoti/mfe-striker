@@ -2,7 +2,6 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   async rewrites() {
-    // Em produção usa variáveis de ambiente, em dev usa Docker
     const mfeLoginUrl = process.env.MFE_LOGIN_URL || "http://mfe-login:3000";
     const mfeRegisterUrl = process.env.MFE_REGISTER_URL || "http://mfe-register:3000";
     
