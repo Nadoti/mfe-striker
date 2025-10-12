@@ -1,0 +1,15 @@
+
+
+.header-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding: 2rem;
+    border-bottom: 1px solid #333334;
+}
+
+.header-email {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #A5B4FC;
+}
