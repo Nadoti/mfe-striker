@@ -5,8 +5,17 @@ const nextConfig: NextConfig = {
     // Em produção usa variáveis de ambiente, em dev usa Docker
     const mfeLoginUrl = process.env.MFE_LOGIN_URL || "http://mfe-login:3000";
     const mfeRegisterUrl = process.env.MFE_REGISTER_URL || "http://mfe-register:3000";
+    const mfeHomeUrl = process.env.MFE_HOME_URL || "http://mfe-home:3000";
     
     return [
+      {
+        source: "/home",
+        destination: `${mfeHomeUrl}/home`,
+      },
+      {
+        source: "/home/:path*",
+        destination: `${mfeHomeUrl}/home/:path*`,
+      },
       {
         source: "/login",
         destination: `${mfeLoginUrl}/login`,

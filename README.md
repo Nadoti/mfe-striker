@@ -10,6 +10,7 @@ microfront-nextjs/
 │   ├── app-main/       # Aplicação principal (porta 4000)
 │   ├── mfe-login/      # Microfrontend Login (porta 4001)
 │   └── mfe-register/   # Microfrontend Register (porta 4002)
+│   └── mfe-home/       # Microfrontend Home (porta 4003)
 └── docker-compose.yml
 ```
 

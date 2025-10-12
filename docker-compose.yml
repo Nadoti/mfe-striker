@@ -52,6 +52,23 @@ services:
     networks:
       - microfront-network
 
+  mfe-home:
+    build:
+      context: ./packages/mfe-home
+      dockerfile: Dockerfile
+    container_name: mfe-home
+    ports:
+      - "4003:3000"
+    volumes:
+      - ./packages/mfe-home:/app
+      - /app/node_modules
+      - /app/.next
+    environment:
+      - NODE_ENV=development
+      - WATCHPACK_POLLING=true
+    networks:
+      - microfront-network
+
 networks:
   microfront-network:
     driver: bridge
