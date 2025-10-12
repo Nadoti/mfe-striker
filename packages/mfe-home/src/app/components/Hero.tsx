@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 
 export default function Hero() {
+  
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => setIsVisible(true), []);
@@ -18,8 +19,8 @@ export default function Hero() {
             Experimente uma nova era bancária com tecnologia de ponta, segurança máxima e atendimento humanizado 24/7.
           </p>
           <div className="hero-buttons">
-            <button className="primary">Abrir Conta Gratuita</button>
-            <button className="secondary">Saiba Mais</button>
+            <a href="register" aria-label="Abra uma Conta Gratuita" className="primary" >Abrir Conta Gratuita</a>
+            <a href="login" aria-label="Faça o login da sua conta" className="primary" >Já possui conta? Faça login</a>
           </div>
         </div>
         <div className={isVisible ? "fade-in" : ""}>

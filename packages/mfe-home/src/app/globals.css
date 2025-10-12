@@ -84,9 +84,16 @@ button {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
-.hero-buttons button {
+@media (min-width: 1024px) {
+  .hero-buttons {
+    justify-content: start;
+  }
+}
+
+.hero-buttons a {
   padding: 1rem 2rem;
   font-size: 1rem;
   font-weight: 600;
