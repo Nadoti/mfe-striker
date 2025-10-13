@@ -17,6 +17,7 @@ services:
       - WATCHPACK_POLLING=true
       - CHOKIDAR_USEPOLLING=true
       - CHOKIDAR_INTERVAL=1000
+      - NODE_OPTIONS=--max-old-space-size=4096
     networks:
       - microfront-network
 
@@ -35,6 +36,7 @@ services:
       - NODE_ENV=development
       - WATCHPACK_POLLING=true
       - CHOKIDAR_USEPOLLING=true
+      - NODE_OPTIONS=--max-old-space-size=4096
     networks:
       - microfront-network
 
@@ -53,6 +55,7 @@ services:
       - NODE_ENV=development
       - WATCHPACK_POLLING=true
       - CHOKIDAR_USEPOLLING=true
+      - NODE_OPTIONS=--max-old-space-size=4096
     networks:
       - microfront-network
 
@@ -70,6 +73,7 @@ services:
     environment:
       - NODE_ENV=development
       - WATCHPACK_POLLING=true
+      - NODE_OPTIONS=--max-old-space-size=4096
     networks:
       - microfront-network
 
