@@ -1,6 +1,5 @@
 .dashboard-container {
-  display: grid;
-  grid-template-columns: 200px 1fr;
+  display: flex;
   min-height: 100vh;
   background-color: #262627;
 }
@@ -68,4 +67,12 @@
   .dashboard-page {
     padding: 1rem;
   }
+}
+
+@media (min-width: 1024px) {
+  .dashboard-container {
+    width: auto;
+    display: block;
+    padding-left: 10rem;
+}
 }
