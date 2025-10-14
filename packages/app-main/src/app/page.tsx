@@ -7,7 +7,6 @@ export default function Home() {
   const router = useRouter();
 
   useEffect(() => {
-    // Redirecionar para /home (mfe-home)
     router.replace('/home');
   }, [router]);
 

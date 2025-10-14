@@ -24,7 +24,6 @@ export default function Login() {
     setLoading(true);
 
     try {
-      // Fazer login no Supabase
       const { data, error: signInError } = await supabase.auth.signInWithPassword({
         email: email,
         password: password,
@@ -37,20 +36,17 @@ export default function Login() {
       }
 
       if (data.user && data.session) {
-        // Salvar dados do usuário no localStorage
         localStorage.setItem('auth_user', JSON.stringify({
           id: data.user.id,
           email: data.user.email,
           createdAt: data.user.created_at,
         }));
 
-        // Salvar token de sessão no localStorage
         localStorage.setItem('auth_token', data.session.access_token);
         localStorage.setItem('auth_refresh_token', data.session.refresh_token);
 
         toast.success('Login realizado com sucesso! Redirecionando...');
         
-        // Redirecionar após 1 segundo
         setTimeout(() => {
           window.location.href = '/dashboard';
         }, 1000);
