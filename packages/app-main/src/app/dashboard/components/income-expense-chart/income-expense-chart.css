@@ -1,0 +1,21 @@
+/* Chart Card */
+.chart-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.chart-card h3 {
+  font-size: 1.25rem;
+  color: #1e293b;
+  margin: 0 0 1rem 0;
+  font-weight: 600;
+}
+
+.chart-loading {
+  text-align: center;
+  padding: 2rem;
+  color: #64748b;
+}
+

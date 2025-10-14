@@ -1,4 +1,6 @@
-'use cliente'
+'use client'
+
+import './stats.css'
 
 interface Stat {
   number: string;
@@ -21,3 +23,4 @@ export default function Stats({ stats }: StatsProps) {
     </section>
   );
 }
+

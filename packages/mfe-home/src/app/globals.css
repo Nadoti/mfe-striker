@@ -30,19 +30,13 @@ button {
   transition: all 0.3s ease;
 }
 
-/* ===============================
-   Home Container
-   =============================== */
 .home-container {
   min-height: 100vh;
-  background-color: #111827; /* bg-gray-900 */
+  background-color: #111827; 
   color: #ffffff;
   overflow-x: hidden;
 }
 
-/* ===============================
-   Hero Section
-   =============================== */
 .hero {
   min-height: 80vh;
   display: flex;
@@ -53,7 +47,7 @@ button {
 
 .hero-content {
   display: grid;
-  grid-template-columns: 1fr; /* Uma coluna no mobile */
+  grid-template-columns: 1fr;
   gap: 2rem;
   max-width: 1200px;
   margin: 0 auto;
@@ -62,7 +56,7 @@ button {
 
 @media (min-width: 768px) {
   .hero-content {
-    grid-template-columns: 1fr 1fr; /* Duas colunas lado a lado */
+    grid-template-columns: 1fr 1fr; 
     gap: 3rem;
   }
 }
@@ -164,9 +158,6 @@ button {
   font-size: 0.875rem;
 }
 
-/* ===============================
-   Stats
-   =============================== */
 .stats {
   display: flex;
   flex-direction: column;
@@ -218,64 +209,58 @@ button {
   color: #d1d5db;
 }
 
-/* ===============================
-   Background effects
-   =============================== */
-.fx-container {
+.effects-container {
   position: fixed;
   inset: 0;
   pointer-events: none;
   overflow: hidden;
-  z-index: 50;
+  z-index: -1;
 }
 
-.pos-top-left-quarter {
+/* Blob base */
+.effect-blob {
   position: absolute;
+  width: 24rem;
+  height: 24rem;
+  border-radius: 9999px;
+  filter: blur(32px);
+  animation: pulse-effect 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Cores dos blobs */
+.effect-blob-blue {
+  background-color: rgba(59, 130, 246, 0.2);
+}
+
+.effect-blob-purple {
+  background-color: rgba(168, 85, 247, 0.2);
+}
+
+/* Posicionamento */
+.effect-blob-top-left {
   top: 25%;
   left: 25%;
 }
 
-.pos-bottom-right-quarter {
-  position: absolute;
+.effect-blob-bottom-right {
   bottom: 25%;
   right: 25%;
 }
 
-.size-96 {
-  width: 24rem;
-  height: 24rem;
-}
-
-.bg-blue-soft {
-  background-color: rgba(59, 130, 246, 0.2);
-}
-
-.bg-purple-soft {
-  background-color: rgba(168, 85, 247, 0.2);
-}
-
-.rounded-full {
-  border-radius: 9999px;
-}
-
-.blur-xl {
-  filter: blur(32px);
-}
-
-.animate-pulse {
-  animation: tw-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
-.delay-1000 {
+/* Animação com delay */
+.effect-blob-delayed {
   animation-delay: 1s;
 }
 
-@keyframes tw-pulse {
+/* Animação de pulse */
+@keyframes pulse-effect {
   0%, 100% {
     opacity: 1;
+    transform: scale(1);
   }
   50% {
     opacity: 0.5;
+    transform: scale(1.05);
   }
 }
 

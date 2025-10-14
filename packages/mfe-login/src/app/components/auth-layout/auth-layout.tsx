@@ -1,3 +1,5 @@
+import './auth-layout.css';
+
 interface AuthLayoutProps {
   title: string;
   children: React.ReactNode;
@@ -14,3 +16,4 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({ title, children }) => {
     </div>
   );
 };
+
