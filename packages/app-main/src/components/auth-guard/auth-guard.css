@@ -1,0 +1,34 @@
+.auth-guard-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: #262627;
+  color: #fff;
+}
+
+.auth-guard-spinner {
+  border: 3px solid #333;
+  border-top: 3px solid #667eea;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: auth-guard-spin 1s linear infinite;
+}
+
+.auth-guard-message {
+  margin-top: 1rem;
+  font-size: 1rem;
+  color: #fff;
+}
+
+@keyframes auth-guard-spin {
+  0% { 
+    transform: rotate(0deg); 
+  }
+  100% { 
+    transform: rotate(360deg); 
+  }
+}
+

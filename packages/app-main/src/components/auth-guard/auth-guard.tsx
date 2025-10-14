@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { isAuthenticated } from '@/lib/auth';
+import './auth-guard.css';
 
 interface Props {
   children: React.ReactNode;
@@ -17,6 +18,8 @@ export function AuthGuard({ children }: Props) {
     // Verificar autenticação
     const checkAuth = () => {
       // Se não estiver autenticado e estiver tentando acessar dashboard
+      console.log('pathname', pathname);
+      console.log('isAuthenticated', isAuthenticated());
       if (!isAuthenticated() && pathname.startsWith('/dashboard')) {
         router.replace('/login');
         return;
@@ -31,34 +34,12 @@ export function AuthGuard({ children }: Props) {
   // Mostrar loading enquanto verifica
   if (isChecking) {
     return (
-      <div style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        minHeight: '100vh',
-        background: '#262627',
-        color: '#fff',
-      }}>
-        <div style={{
-          border: '3px solid #333',
-          borderTop: '3px solid #667eea',
-          borderRadius: '50%',
-          width: '40px',
-          height: '40px',
-          animation: 'spin 1s linear infinite',
-        }}></div>
-        <p style={{ marginTop: '1rem' }}>Verificando autenticação...</p>
-        <style>{`
-          @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-          }
-        `}</style>
+      <div className="auth-guard-loading">
+        <div className="auth-guard-spinner"></div>
+        <p className="auth-guard-message">Verificando autenticação...</p>
       </div>
     );
   }
 
   return <>{children}</>;
 }
-

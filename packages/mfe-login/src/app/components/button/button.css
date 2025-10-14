@@ -22,7 +22,9 @@
 }
 
 .primary-button:disabled {
-  opacity: 0.6;
+  opacity: 0.7;
   cursor: not-allowed;
+  background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%);
+  transform: none;
 }
 

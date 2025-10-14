@@ -71,6 +71,7 @@ export default function Login() {
             setEmail={setEmail} 
             setPassword={setPassword} 
             handleSubmit={handleSubmit}
+            loading={loading}
           />
         </AuthLayout>
       </div>

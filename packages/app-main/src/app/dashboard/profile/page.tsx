@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase';
+import { toast } from 'sonner';
 import './profile.css';
 
 interface Session {
@@ -17,7 +18,7 @@ export default function ProfilePage() {
   useEffect(() => {
     const getSession = () => {
       try {
-        const sessionData = localStorage.getItem('auth_session');
+        const sessionData = localStorage.getItem('auth_user');
         if (!sessionData) {
           return null;
         }
@@ -40,16 +41,29 @@ export default function ProfilePage() {
   }, []);
 
   const handleLogout = async () => {
-    if (confirm('Deseja sair da sua conta?')) {
-      // Logout do Supabase
-      await supabase.auth.signOut();
-      
-      // Limpar localStorage
-      localStorage.removeItem('auth_session');
-      
-      alert('✅ Logout realizado com sucesso!');
-      window.location.href = '/login';
-    }
+    toast.promise(
+      async () => {
+        // Logout do Supabase
+        await supabase.auth.signOut();
+        
+        // Limpar localStorage
+        localStorage.removeItem('auth_session');
+        localStorage.removeItem('auth_user');
+        localStorage.removeItem('auth_token');
+        localStorage.removeItem('auth_refresh_token');
+        
+        // Pequeno delay para mostrar o toast
+        await new Promise(resolve => setTimeout(resolve, 500));
+        
+        // Redirecionar
+        window.location.href = '/login';
+      },
+      {
+        loading: 'Saindo da conta...',
+        success: 'Logout realizado com sucesso!',
+        error: 'Erro ao fazer logout',
+      }
+    );
   };
 
   if (loading) {
@@ -107,14 +121,10 @@ export default function ProfilePage() {
 
         <div className="profile-actions">
           <button className="logout-button" onClick={handleLogout}>
-            🚪 Sair da Conta
+            Sair da Conta
           </button>
         </div>
 
-        <div className="profile-footer">
-          <p>✅ Autenticado com Supabase</p>
-          <p>🌐 Funciona em Local e Produção</p>
-        </div>
       </div>
     </div>
   );
