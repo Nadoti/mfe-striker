@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { supabase } from '@/lib/supabase';
 import { toast } from 'sonner';
+import { GuestGuard } from '@/components/guest-guard/guest-guard';
 import './register.css';
 
 export function Register() {
@@ -79,44 +80,46 @@ export function Register() {
   };
 
   return (
-    <div className="d-flex justify-center align-items-center height-100">
-      <div className="auth-container">
-        <h1 className="brand">Blue Bank</h1>
+    <GuestGuard>
+      <div className="d-flex justify-center align-items-center height-100">
+        <div className="auth-container">
+          <h1 className="brand">Blue Bank</h1>
 
-        <div className="auth-box">
-          <h2 className="auth-title">Crie sua conta</h2>
+          <div className="auth-box">
+            <h2 className="auth-title">Crie sua conta</h2>
 
-          <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit}>
 
-            <div className="input-group">
-              <input
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
+              <div className="input-group">
+                <input
+                  type="email"
+                  placeholder="Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+
+              <div className="input-group">
+                <input
+                  type="password"
+                  placeholder="Senha"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+
+              <button type="submit" className="primary-button" disabled={loading}>
+                {loading ? 'Criando conta...' : 'Criar conta'}
+              </button>
+            </form>
+
+            <div className="login-link">
+              Já tem uma conta? <a href="/login">Entre aqui</a>
             </div>
-
-            <div className="input-group">
-              <input
-                type="password"
-                placeholder="Senha"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-
-            <button type="submit" className="primary-button" disabled={loading}>
-              {loading ? 'Criando conta...' : 'Criar conta'}
-            </button>
-          </form>
-
-          <div className="login-link">
-            Já tem uma conta? <a href="/login">Entre aqui</a>
           </div>
         </div>
       </div>
-    </div>
+    </GuestGuard>
   );
 }
 

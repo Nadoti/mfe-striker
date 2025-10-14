@@ -6,6 +6,7 @@ import { toast } from 'sonner';
 import './login.css';
 import { AuthLayout } from '../auth-layout/auth-layout';
 import { SignupForm } from '../signup-form/signup-form';
+import { GuestGuard } from '@/components/guest-guard/guest-guard';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -63,15 +64,17 @@ export default function Login() {
   };
 
   return (
-    <div className="d-flex justify-center">
-      <AuthLayout title="Acesse sua conta">
-        <SignupForm 
-          setEmail={setEmail} 
-          setPassword={setPassword} 
-          handleSubmit={handleSubmit}
-        />
-      </AuthLayout>
-    </div>
+    <GuestGuard>
+      <div className="d-flex justify-center">
+        <AuthLayout title="Acesse sua conta">
+          <SignupForm 
+            setEmail={setEmail} 
+            setPassword={setPassword} 
+            handleSubmit={handleSubmit}
+          />
+        </AuthLayout>
+      </div>
+    </GuestGuard>
   );
 }
 
