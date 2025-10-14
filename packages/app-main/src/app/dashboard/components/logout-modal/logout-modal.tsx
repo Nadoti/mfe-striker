@@ -1,6 +1,7 @@
 'use client';
 
 import './logout-modal.css';
+import { FaExclamationCircle } from "react-icons/fa";
 
 interface Props {
   isOpen: boolean;
@@ -16,21 +17,7 @@ export function LogoutModal({ isOpen, onClose, onConfirm, loading = false }: Pro
     <div className="logout-modal-overlay" onClick={onClose}>
       <div className="logout-modal-content" onClick={(e) => e.stopPropagation()}>
         <div className="logout-modal-icon">
-          <svg
-            width="64"
-            height="64"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <circle cx="12" cy="12" r="10" stroke="#ef4444" strokeWidth="2" />
-            <path
-              d="M12 7V13M12 17H12.01"
-              stroke="#ef4444"
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
-          </svg>
+          <FaExclamationCircle color="#ef4444" size={64} />
         </div>
 
         <h2 className="logout-modal-title">Sair da conta?</h2>

@@ -1,6 +1,7 @@
 'use client';
 
 import './confirm-modal.css';
+import { BsExclamationCircle, BsExclamationTriangle, BsInfoCircle } from "react-icons/bs";
 
 interface Props {
   isOpen: boolean;
@@ -31,44 +32,16 @@ export function ConfirmModal({
     switch (type) {
       case 'danger':
         return (
-          <svg width="64" height="64" viewBox="0 0 24 24" fill="none">
-            <path
-              d="M12 2L2 22h20L12 2z"
-              stroke="#ef4444"
-              strokeWidth="2"
-              fill="none"
-            />
-            <path
-              d="M12 9v4M12 17h.01"
-              stroke="#ef4444"
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
-          </svg>
+         
+          <BsExclamationTriangle color="#ef4444" size={64} />
         );
       case 'warning':
         return (
-          <svg width="64" height="64" viewBox="0 0 24 24" fill="none">
-            <circle cx="12" cy="12" r="10" stroke="#f59e0b" strokeWidth="2" />
-            <path
-              d="M12 7V13M12 17H12.01"
-              stroke="#f59e0b"
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
-          </svg>
+          <BsExclamationCircle color="#f59e0b" size={64} />
         );
       default:
         return (
-          <svg width="64" height="64" viewBox="0 0 24 24" fill="none">
-            <circle cx="12" cy="12" r="10" stroke="#3b82f6" strokeWidth="2" />
-            <path
-              d="M12 7V13M12 17H12.01"
-              stroke="#3b82f6"
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
-          </svg>
+          <BsInfoCircle color="#3b82f6" size={64} />
         );
     }
   };
