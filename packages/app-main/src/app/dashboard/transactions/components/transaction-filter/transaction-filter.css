@@ -1,4 +1,3 @@
-/* Filtros */
 .transaction-filters {
   background: white;
   padding: 1.5rem;
@@ -150,7 +149,6 @@
   background: #fecaca;
 }
 
-/* Responsivo */
 @media (max-width: 768px) {
   .filter-grid {
     grid-template-columns: 1fr;

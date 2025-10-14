@@ -25,7 +25,6 @@ export function Navbar() {
             const { supabase } = await import('@/lib/supabase');
             await supabase.auth.signOut();
             
-            // Limpar todos os dados do localStorage
             localStorage.removeItem('auth_user');
             localStorage.removeItem('auth_token');
             localStorage.removeItem('auth_refresh_token');
@@ -33,7 +32,6 @@ export function Navbar() {
             
             toast.success('Logout realizado com sucesso!');
             
-            // Pequeno delay para mostrar o toast
             setTimeout(() => {
                 window.location.href = '/login';
             }, 500);
@@ -78,7 +76,6 @@ export function Navbar() {
         </nav>
       </div>
 
-      {/* Modal de Logout */}
       <LogoutModal
         isOpen={isLogoutModalOpen}
         onClose={() => setIsLogoutModalOpen(false)}

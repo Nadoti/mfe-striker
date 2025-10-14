@@ -8,32 +8,23 @@ import type {
   PaginatedResponse,
 } from '@/types/transaction';
 
-/**
- * Serviço para gerenciar transações financeiras
- */
 export class TransactionService {
-  /**
-   * Buscar transações com filtros, busca e paginação
-   */
   static async getTransactions(
     filters?: TransactionFilters,
     pagination?: PaginationParams
   ): Promise<PaginatedResponse<Transaction>> {
     try {
-      // Pegar user_id da sessão
       const { data: { user } } = await supabase.auth.getUser();
       
       if (!user) {
         throw new Error('Usuário não autenticado');
       }
 
-      // Construir query base
       let query = supabase
         .from('transactions')
         .select('*', { count: 'exact' })
         .eq('user_id', user.id);
 
-      // Aplicar filtros
       if (filters?.type) {
         query = query.eq('type', filters.type);
       }
@@ -58,18 +49,15 @@ export class TransactionService {
         query = query.lte('amount', filters.maxAmount);
       }
 
-      // Busca por texto (description ou category)
       if (filters?.search) {
         query = query.or(
           `description.ilike.%${filters.search}%,category.ilike.%${filters.search}%`
         );
       }
 
-      // Ordenar por data (mais recente primeiro)
       query = query.order('date', { ascending: false });
       query = query.order('created_at', { ascending: false });
 
-      // Aplicar paginação
       if (pagination) {
         const { page, limit } = pagination;
         const from = (page - 1) * limit;
@@ -101,9 +89,6 @@ export class TransactionService {
     }
   }
 
-  /**
-   * Buscar transação por ID
-   */
   static async getTransactionById(id: string): Promise<Transaction | null> {
     try {
       const { data: { user } } = await supabase.auth.getUser();
@@ -130,9 +115,6 @@ export class TransactionService {
     }
   }
 
-  /**
-   * Criar nova transação
-   */
   static async createTransaction(
     transaction: CreateTransactionDTO
   ): Promise<Transaction> {
@@ -163,9 +145,6 @@ export class TransactionService {
     }
   }
 
-  /**
-   * Atualizar transação existente
-   */
   static async updateTransaction(
     transaction: UpdateTransactionDTO
   ): Promise<Transaction> {
@@ -197,9 +176,6 @@ export class TransactionService {
     }
   }
 
-  /**
-   * Deletar transação
-   */
   static async deleteTransaction(id: string): Promise<void> {
     try {
       const { data: { user } } = await supabase.auth.getUser();
@@ -223,9 +199,6 @@ export class TransactionService {
     }
   }
 
-  /**
-   * Obter resumo financeiro (total de receitas e despesas)
-   */
   static async getFinancialSummary(startDate?: string, endDate?: string) {
     try {
       const { data: { user } } = await supabase.auth.getUser();
@@ -275,9 +248,6 @@ export class TransactionService {
     }
   }
 
-  /**
-   * Obter transações agrupadas por categoria
-   */
   static async getTransactionsByCategory(type?: 'income' | 'expense') {
     try {
       const { data: { user } } = await supabase.auth.getUser();
@@ -301,7 +271,6 @@ export class TransactionService {
         throw error;
       }
 
-      // Agrupar por categoria
       const grouped = data.reduce((acc: any, transaction) => {
         const key = transaction.category;
         if (!acc[key]) {

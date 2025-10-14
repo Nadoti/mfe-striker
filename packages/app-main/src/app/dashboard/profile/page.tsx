@@ -41,10 +41,8 @@ export default function ProfilePage() {
 
   const handleLogout = async () => {
     if (confirm('Deseja sair da sua conta?')) {
-      // Logout do Supabase
       await supabase.auth.signOut();
       
-      // Limpar localStorage
       localStorage.removeItem('auth_session');
       
       alert('✅ Logout realizado com sucesso!');

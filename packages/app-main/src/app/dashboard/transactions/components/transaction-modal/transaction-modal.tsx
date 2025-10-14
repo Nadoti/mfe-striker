@@ -32,12 +32,10 @@ export function TransactionModal({ transaction, onClose, onSave }: Props) {
   const [uploadingFiles, setUploadingFiles] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(false);
 
-  // Hooks de validação e sugestões
   const categorySuggestions = useCategorySuggestions(formData.description || '', formData.type);
   const amountWarning = useAmountValidation(formData.amount, formData.type);
   const dateWarning = useDateValidation(formData.date);
 
-  // Preencher form ao editar
   useEffect(() => {
     if (transaction) {
       setFormData({
@@ -51,7 +49,6 @@ export function TransactionModal({ transaction, onClose, onSave }: Props) {
     }
   }, [transaction]);
 
-  // Mostrar sugestões quando houver
   useEffect(() => {
     setShowSuggestions(categorySuggestions.length > 0 && !formData.category);
   }, [categorySuggestions, formData.category]);
@@ -63,18 +60,15 @@ export function TransactionModal({ transaction, onClose, onSave }: Props) {
     }));
   };
 
-  // Aplicar sugestão de categoria
   const applySuggestion = (category: string) => {
     handleChange('category', category);
     setShowSuggestions(false);
   };
 
-  // Upload de arquivos
   const handleFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files || files.length === 0) return;
 
-    // Validar quantidade (máx 3 arquivos por transação)
     const currentAttachments = formData.attachments || [];
     if (currentAttachments.length + files.length > 3) {
       toast.error('Máximo de 3 anexos por transação');
@@ -93,19 +87,16 @@ export function TransactionModal({ transaction, onClose, onSave }: Props) {
       toast.error(error.message || 'Erro ao fazer upload dos arquivos');
     } finally {
       setUploadingFiles(false);
-      // Resetar input
       if (fileInputRef.current) {
         fileInputRef.current.value = '';
       }
     }
   };
 
-  // Remover anexo
   const removeAttachment = async (index: number) => {
     const attachments = formData.attachments || [];
     const attachmentToRemove = attachments[index];
 
-    // Se for edição, deletar do storage
     if (isEditing) {
       try {
         await StorageService.deleteFile(attachmentToRemove.url);
@@ -114,7 +105,6 @@ export function TransactionModal({ transaction, onClose, onSave }: Props) {
       }
     }
 
-    // Remover do formulário
     const newAttachments = attachments.filter((_, i) => i !== index);
     handleChange('attachments', newAttachments);
     toast.success('Anexo removido');
@@ -181,7 +171,6 @@ export function TransactionModal({ transaction, onClose, onSave }: Props) {
         </div>
 
         <form onSubmit={handleSubmit} className="transaction-form">
-          {/* Tipo */}
           <div className="form-group">
             <label>Tipo *</label>
             <div className="type-toggle">
@@ -190,7 +179,7 @@ export function TransactionModal({ transaction, onClose, onSave }: Props) {
                 className={`type-btn ${formData.type === 'income' ? 'active' : ''}`}
                 onClick={() => {
                   handleChange('type', 'income');
-                  handleChange('category', ''); // Reset categoria
+                  handleChange('category', '');
                 }}
               >
                 Receita
@@ -200,7 +189,7 @@ export function TransactionModal({ transaction, onClose, onSave }: Props) {
                 className={`type-btn ${formData.type === 'expense' ? 'active' : ''}`}
                 onClick={() => {
                   handleChange('type', 'expense');
-                  handleChange('category', ''); // Reset categoria
+                  handleChange('category', '');
                 }}
               >
                 Despesa
@@ -208,8 +197,7 @@ export function TransactionModal({ transaction, onClose, onSave }: Props) {
             </div>
           </div>
 
-          {/* Categoria */}
-          <div className="form-group">
+           <div className="form-group">
             <label>Categoria *</label>
             <select
               value={formData.category}
@@ -224,7 +212,6 @@ export function TransactionModal({ transaction, onClose, onSave }: Props) {
               ))}
             </select>
             
-            {/* Sugestões automáticas de categoria */}
             {showSuggestions && categorySuggestions.length > 0 && (
               <div className="category-suggestions">
                 <p className="suggestions-label">💡 Sugestões baseadas na descrição:</p>
@@ -244,7 +231,6 @@ export function TransactionModal({ transaction, onClose, onSave }: Props) {
             )}
           </div>
 
-          {/* Valor */}
           <div className="form-group">
             <label>Valor *</label>
             <input
@@ -261,7 +247,6 @@ export function TransactionModal({ transaction, onClose, onSave }: Props) {
             )}
           </div>
 
-          {/* Data */}
           <div className="form-group">
             <label>Data *</label>
             <input
@@ -275,7 +260,6 @@ export function TransactionModal({ transaction, onClose, onSave }: Props) {
             )}
           </div>
 
-          {/* Descrição */}
           <div className="form-group">
             <label>Descrição</label>
             <textarea
@@ -289,7 +273,6 @@ export function TransactionModal({ transaction, onClose, onSave }: Props) {
             </p>
           </div>
 
-          {/* Anexos */}
           <div className="form-group">
             <label>Anexos (Recibos, Notas Fiscais)</label>
             <div className="attachments-section">
@@ -316,7 +299,6 @@ export function TransactionModal({ transaction, onClose, onSave }: Props) {
                 Máximo 3 arquivos • JPG, PNG, WEBP ou PDF • Até 5MB cada
               </p>
 
-              {/* Lista de anexos */}
               {formData.attachments && formData.attachments.length > 0 && (
                 <div className="attachments-list">
                   {formData.attachments.map((attachment, index) => (
@@ -358,7 +340,6 @@ export function TransactionModal({ transaction, onClose, onSave }: Props) {
             </div>
           </div>
 
-          {/* Botões */}
           <div className="modal-actions">
             <button
               type="button"

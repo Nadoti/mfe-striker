@@ -27,7 +27,6 @@ export default function TransactionsPage() {
   const [transactionToDelete, setTransactionToDelete] = useState<string | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
 
-  // Carregar transações
   const loadTransactions = async () => {
     try {
       setLoading(true);
@@ -43,30 +42,25 @@ export default function TransactionsPage() {
     }
   };
 
-  // Recarregar ao mudar filtros ou página
   useEffect(() => {
     loadTransactions();
   }, [filters, page]);
 
-  // Abrir modal para criar
   const handleCreate = () => {
     setEditingTransaction(null);
     setIsModalOpen(true);
   };
 
-  // Abrir modal para editar
   const handleEdit = (transaction: Transaction) => {
     setEditingTransaction(transaction);
     setIsModalOpen(true);
   };
 
-  // Abrir modal de confirmação de exclusão
   const handleDelete = (id: string) => {
     setTransactionToDelete(id);
     setIsDeleteModalOpen(true);
   };
 
-  // Confirmar exclusão
   const confirmDelete = async () => {
     if (!transactionToDelete) return;
 
@@ -85,7 +79,6 @@ export default function TransactionsPage() {
     }
   };
 
-  // Após salvar no modal
   const handleSave = () => {
     setIsModalOpen(false);
     setEditingTransaction(null);
@@ -105,7 +98,7 @@ console.log('transactions', transactions  )
         filters={filters} 
         onFiltersChange={(newFilters) => {
           setFilters(newFilters);
-          setPage(1); // Reset para primeira página
+          setPage(1);
         }} 
       />
 
@@ -116,7 +109,6 @@ console.log('transactions', transactions  )
         onDelete={handleDelete}
       />
 
-      {/* Paginação */}
       {transactions.totalPages > 1 && (
         <div className="pagination">
           <button
@@ -141,7 +133,6 @@ console.log('transactions', transactions  )
         </div>
       )}
 
-      {/* Modal para criar/editar */}
       {isModalOpen && (
         <TransactionModal
           transaction={editingTransaction}
@@ -153,7 +144,6 @@ console.log('transactions', transactions  )
         />
       )}
 
-      {/* Modal de confirmação de exclusão */}
       <ConfirmModal
         isOpen={isDeleteModalOpen}
         onClose={() => {

@@ -19,7 +19,6 @@ export default function ProductsPage() {
               borderRadius: '4px',
               marginBottom: '1rem'
             }}>
-              {/* Placeholder para imagem */}
             </div>
             <h3>Produto {item}</h3>
             <p style={{ color: '#6b7280' }}>Descrição do produto {item}</p>

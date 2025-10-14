@@ -7,7 +7,6 @@ export default function Dashboard() {
   const router = useRouter();
 
   useEffect(() => {
-    // Redirecionar automaticamente para /dashboard/home
     router.replace('/dashboard/home');
   }, [router]);
 

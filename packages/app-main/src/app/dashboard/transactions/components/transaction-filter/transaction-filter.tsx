@@ -17,12 +17,10 @@ export function TransactionFilter({ filters, onFiltersChange }: Props) {
   const [minAmountInput, setMinAmountInput] = useState(filters.minAmount?.toString() || '');
   const [maxAmountInput, setMaxAmountInput] = useState(filters.maxAmount?.toString() || '');
   
-  // Debounce com 2 segundos
   const debouncedSearch = useDebounce(searchInput, 2000);
   const debouncedMinAmount = useDebounce(minAmountInput, 2000);
   const debouncedMaxAmount = useDebounce(maxAmountInput, 2000);
 
-  // Atualizar filtros quando o debounced search mudar
   useEffect(() => {
     if (debouncedSearch !== filters.search) {
       onFiltersChange({
@@ -32,7 +30,6 @@ export function TransactionFilter({ filters, onFiltersChange }: Props) {
     }
   }, [debouncedSearch]);
 
-  // Atualizar filtros quando o debounced minAmount mudar
   useEffect(() => {
     const numValue = minAmountInput ? Number(minAmountInput) : undefined;
     if (numValue !== filters.minAmount) {
@@ -43,7 +40,6 @@ export function TransactionFilter({ filters, onFiltersChange }: Props) {
     }
   }, [debouncedMinAmount]);
 
-  // Atualizar filtros quando o debounced maxAmount mudar
   useEffect(() => {
     const numValue = maxAmountInput ? Number(maxAmountInput) : undefined;
     if (numValue !== filters.maxAmount) {
@@ -54,7 +50,6 @@ export function TransactionFilter({ filters, onFiltersChange }: Props) {
     }
   }, [debouncedMaxAmount]);
 
-  // Sincronizar searchInput quando filters.search mudar externamente
   useEffect(() => {
     if (filters.search !== searchInput && filters.search !== undefined) {
       setSearchInput(filters.search);
@@ -63,7 +58,6 @@ export function TransactionFilter({ filters, onFiltersChange }: Props) {
     }
   }, [filters.search]);
 
-  // Sincronizar minAmountInput quando filters.minAmount mudar externamente
   useEffect(() => {
     const filterValue = filters.minAmount?.toString() || '';
     if (filterValue !== minAmountInput) {
@@ -71,7 +65,6 @@ export function TransactionFilter({ filters, onFiltersChange }: Props) {
     }
   }, [filters.minAmount]);
 
-  // Sincronizar maxAmountInput quando filters.maxAmount mudar externamente
   useEffect(() => {
     const filterValue = filters.maxAmount?.toString() || '';
     if (filterValue !== maxAmountInput) {
@@ -94,7 +87,6 @@ export function TransactionFilter({ filters, onFiltersChange }: Props) {
 
   return (
     <div className="transaction-filters">
-      {/* Busca rápida */}
       <div className="filter-search">
         <input
           type="text"
@@ -108,7 +100,6 @@ export function TransactionFilter({ filters, onFiltersChange }: Props) {
         )}
       </div>
 
-      {/* Toggle filtros avançados */}
       <button
         className="toggle-filters-btn"
         onClick={() => setIsExpanded(!isExpanded)}
@@ -117,11 +108,9 @@ export function TransactionFilter({ filters, onFiltersChange }: Props) {
         {hasActiveFilters && <span className="filter-badge">{Object.keys(filters).length}</span>}
       </button>
 
-      {/* Filtros avançados */}
       {isExpanded && (
         <div className="filters-expanded">
           <div className="filter-grid">
-            {/* Tipo */}
             <div className="filter-item">
               <label>Tipo</label>
               <select
@@ -134,7 +123,6 @@ export function TransactionFilter({ filters, onFiltersChange }: Props) {
               </select>
             </div>
 
-            {/* Categoria */}
             <div className="filter-item">
               <label>Categoria</label>
               <select
@@ -155,7 +143,6 @@ export function TransactionFilter({ filters, onFiltersChange }: Props) {
               </select>
             </div>
 
-            {/* Data inicial */}
             <div className="filter-item">
               <label>Data Inicial</label>
               <input
@@ -165,7 +152,6 @@ export function TransactionFilter({ filters, onFiltersChange }: Props) {
               />
             </div>
 
-            {/* Data final */}
             <div className="filter-item">
               <label>Data Final</label>
               <input
@@ -175,7 +161,6 @@ export function TransactionFilter({ filters, onFiltersChange }: Props) {
               />
             </div>
 
-            {/* Valor mínimo */}
             <div className="filter-item">
               <label>Valor Mínimo</label>
               <div className="filter-input-wrapper">
@@ -193,7 +178,6 @@ export function TransactionFilter({ filters, onFiltersChange }: Props) {
               </div>
             </div>
 
-            {/* Valor máximo */}
             <div className="filter-item">
               <label>Valor Máximo</label>
               <div className="filter-input-wrapper">
@@ -212,7 +196,6 @@ export function TransactionFilter({ filters, onFiltersChange }: Props) {
             </div>
           </div>
 
-          {/* Botão limpar */}
           {hasActiveFilters && (
             <button className="clear-filters-btn" onClick={clearFilters}>
               Limpar Filtros

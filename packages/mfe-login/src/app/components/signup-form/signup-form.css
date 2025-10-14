@@ -1,11 +1,9 @@
-/* Formulário de login */
 .signup-form {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-/* Link de cadastro */
 .login-link {
   margin-top: 20px;
   text-align: center;

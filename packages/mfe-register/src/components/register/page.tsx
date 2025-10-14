@@ -19,7 +19,6 @@ export function Register() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Validações
     if (!email || !password) {
       toast.error('Por favor, preencha todos os campos!');
       return;
@@ -38,7 +37,6 @@ export function Register() {
     setLoading(true);
 
     try {
-      // Registrar no Supabase
       const { data, error: signUpError } = await supabase.auth.signUp({
         email: email,
         password: password,
@@ -51,14 +49,12 @@ export function Register() {
       }
 
       if (data.user) {
-        // Salvar dados do usuário no localStorage
         localStorage.setItem('auth_user', JSON.stringify({
           id: data.user.id,
           email: data.user.email,
           createdAt: data.user.created_at,
         }));
 
-        // Se tiver sessão, salvar tokens também
         if (data.session) {
           localStorage.setItem('auth_token', data.session.access_token);
           localStorage.setItem('auth_refresh_token', data.session.refresh_token);
@@ -66,7 +62,6 @@ export function Register() {
 
         toast.success('Conta criada com sucesso! Redirecionando...');
         
-        // Redirecionar após 1.5 segundos
         setTimeout(() => {
           window.location.href = '/login';
         }, 1500);

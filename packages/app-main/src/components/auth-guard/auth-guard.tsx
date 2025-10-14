@@ -14,9 +14,7 @@ export function AuthGuard({ children }: Props) {
   const [isChecking, setIsChecking] = useState(true);
 
   useEffect(() => {
-    // Verificar autenticação
     const checkAuth = () => {
-      // Se não estiver autenticado e estiver tentando acessar dashboard
       if (!isAuthenticated() && pathname.startsWith('/dashboard')) {
         router.replace('/login');
         return;
@@ -28,7 +26,6 @@ export function AuthGuard({ children }: Props) {
     checkAuth();
   }, [pathname, router]);
 
-  // Mostrar loading enquanto verifica
   if (isChecking) {
     return (
       <div style={{

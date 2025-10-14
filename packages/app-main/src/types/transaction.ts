@@ -57,7 +57,6 @@ export interface PaginatedResponse<T> {
   totalPages: number;
 }
 
-// Categorias padrão
 export const INCOME_CATEGORIES = [
   'Salário',
   'Freelance',
