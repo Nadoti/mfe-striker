@@ -3,6 +3,7 @@
 import { usePathname } from 'next/navigation';
 import { Navbar } from './components/navbar/navbar';
 import { Header } from './components/header/header';
+import { AuthGuard } from '@/components/auth-guard/auth-guard';
 import './dashboard.css';
 
 export default function DashboardLayout({
@@ -13,16 +14,18 @@ export default function DashboardLayout({
   const pathname = usePathname();
 
   return (
-    <div className="dashboard-container">
-      <Navbar />
+    <AuthGuard>
+      <div className="dashboard-container">
+        <Navbar />
 
-      <div>
-        <Header />
-        <main className="dashboard-content">
-          {children}
-        </main>
+        <div>
+          <Header />
+          <main className="dashboard-content">
+            {children}
+          </main>
+        </div>
       </div>
-    </div>
+    </AuthGuard>
   );
 }
 

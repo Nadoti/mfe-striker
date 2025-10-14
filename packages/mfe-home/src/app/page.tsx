@@ -1,7 +1,7 @@
 'use client'
 
-import Hero from "./components/Hero";
-import Stats from "./components/Stats";
+import Hero from "./components/hero/hero";
+import Stats from "./components/stats/stats";
 
 const statsData = [
   { number: "2M+", label: "Clientes Ativos" },
@@ -15,9 +15,9 @@ export default function App() {
     <div className="home-container">
       <Hero />
       <Stats stats={statsData} />
-      <div className="fx-container">
-        <div className="pos-top-left-quarter size-96 bg-blue-soft rounded-full blur-xl animate-pulse"></div>
-        <div className="pos-bottom-right-quarter size-96 bg-purple-soft rounded-full blur-xl animate-pulse delay-1000"></div>
+      <div className="effects-container">
+        <div className="effect-blob effect-blob-blue effect-blob-top-left"></div>
+        <div className="effect-blob effect-blob-purple effect-blob-bottom-right effect-blob-delayed"></div>
       </div>
     </div>
   );

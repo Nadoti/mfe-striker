@@ -55,7 +55,10 @@ export default function ProfilePage() {
   if (loading) {
     return (
       <div className="profile-container">
-        <div className="loading">Carregando...</div>
+        <div className="loading">
+          <div className="spinner"></div>
+          <p>Carregando...</p>
+        </div>
       </div>
     );
   }

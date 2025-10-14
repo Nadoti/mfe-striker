@@ -2,12 +2,12 @@
 
 import { useState } from 'react';
 import { supabase } from '@/lib/supabase';
+import { toast } from 'sonner';
 import './register.css';
 
 export function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
   const isValidEmail = (email: string) => {
@@ -17,26 +17,20 @@ export function Register() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
 
     // Validações
     if (!email || !password) {
-      setError('Por favor, preencha todos os campos!');
+      toast.error('Por favor, preencha todos os campos!');
       return;
     }
 
     if (!isValidEmail(email)) {
-      setError('Por favor, insira um email válido!');
+      toast.error('Por favor, insira um email válido!');
       return;
     }
 
     if (password.length < 6) {
-      setError('A senha deve ter no mínimo 6 caracteres!');
-      return;
-    }
-
-    if (password !== password) {
-      setError('As senhas não coincidem!');
+      toast.error('A senha deve ter no mínimo 6 caracteres!');
       return;
     }
 
@@ -50,26 +44,36 @@ export function Register() {
       });
 
       if (signUpError) {
-        setError(signUpError.message);
+        toast.error(signUpError.message);
         setLoading(false);
         return;
       }
 
       if (data.user) {
-        // Salvar sessão no localStorage
-        localStorage.setItem('auth_session', JSON.stringify({
+        // Salvar dados do usuário no localStorage
+        localStorage.setItem('auth_user', JSON.stringify({
           id: data.user.id,
           email: data.user.email,
           createdAt: data.user.created_at,
         }));
 
-        alert('✅ Conta criada com sucesso! Redirecionando...');
-        window.location.href = '/login';
+        // Se tiver sessão, salvar tokens também
+        if (data.session) {
+          localStorage.setItem('auth_token', data.session.access_token);
+          localStorage.setItem('auth_refresh_token', data.session.refresh_token);
+        }
+
+        toast.success('Conta criada com sucesso! Redirecionando...');
+        
+        // Redirecionar após 1.5 segundos
+        setTimeout(() => {
+          window.location.href = '/login';
+        }, 1500);
       }
 
     } catch (error: any) {
       console.error('Erro ao registrar:', error);
-      setError('Erro ao criar conta. Tente novamente.');
+      toast.error('Erro ao criar conta. Tente novamente.');
       setLoading(false);
     }
   };
@@ -102,16 +106,10 @@ export function Register() {
               />
             </div>
 
-            <button type="submit" className="primary-button">
-              Criar conta
+            <button type="submit" className="primary-button" disabled={loading}>
+              {loading ? 'Criando conta...' : 'Criar conta'}
             </button>
           </form>
-
-          {error && (
-            <p style={{ marginTop: "1rem", color: "#A5B4FC", fontSize: "0.9rem" }}>
-              {error}
-            </p>
-          )}
 
           <div className="login-link">
             Já tem uma conta? <a href="/login">Entre aqui</a>

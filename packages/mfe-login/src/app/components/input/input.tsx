@@ -1,3 +1,5 @@
+import './input.css';
+
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
 }
@@ -10,3 +12,4 @@ export const Input: React.FC<InputProps> = ({ label, ...props }) => {
     </div>
   );
 };
+

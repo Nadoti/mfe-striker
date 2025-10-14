@@ -1,11 +1,20 @@
+'use client';
 
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function Dashboard() {
-  return (
-    <div>
-      <h1>Dashboard Home</h1>
-      <p>Bem-vindo ao dashboard!</p>
+  const router = useRouter();
 
+  useEffect(() => {
+    // Redirecionar automaticamente para /dashboard/home
+    router.replace('/dashboard/home');
+  }, [router]);
+
+  return (
+    <div className="loading-state">
+      <div className="spinner"></div>
+      <p>Redirecionando...</p>
     </div>
   );
 }

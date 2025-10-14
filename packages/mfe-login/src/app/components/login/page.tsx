@@ -2,23 +2,21 @@
 
 import { useState } from 'react';
 import { supabase } from '@/lib/supabase';
+import { toast } from 'sonner';
 import './login.css';
-import { AuthLayout } from '../AuthLayout';
-import { SignupForm } from '../SignupForm';
+import { AuthLayout } from '../auth-layout/auth-layout';
+import { SignupForm } from '../signup-form/signup-form';
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
 
     if (!email || !password) {
-      setError('Por favor, preencha todos os campos!');
+      toast.error('Por favor, preencha todos os campos!');
       return;
     }
 
@@ -32,26 +30,34 @@ export default function Login() {
       });
 
       if (signInError) {
-        setError('Email ou senha incorretos!');
+        toast.error('Email ou senha incorretos!');
         setLoading(false);
         return;
       }
 
-      if (data.user) {
-        // Salvar sessão no localStorage
-        localStorage.setItem('auth_session', JSON.stringify({
+      if (data.user && data.session) {
+        // Salvar dados do usuário no localStorage
+        localStorage.setItem('auth_user', JSON.stringify({
           id: data.user.id,
           email: data.user.email,
           createdAt: data.user.created_at,
         }));
 
-        // alert('✅ Login realizado com sucesso! Redirecionando...');
-        // window.location.href = '/dashboard/home';
+        // Salvar token de sessão no localStorage
+        localStorage.setItem('auth_token', data.session.access_token);
+        localStorage.setItem('auth_refresh_token', data.session.refresh_token);
+
+        toast.success('Login realizado com sucesso! Redirecionando...');
+        
+        // Redirecionar após 1 segundo
+        setTimeout(() => {
+          window.location.href = '/dashboard';
+        }, 1000);
       }
 
     } catch (error: any) {
       console.error('Erro ao fazer login:', error);
-      setError('Erro ao fazer login. Tente novamente.');
+      toast.error('Erro ao fazer login. Tente novamente.');
       setLoading(false);
     }
   };
@@ -59,7 +65,11 @@ export default function Login() {
   return (
     <div className="d-flex justify-center">
       <AuthLayout title="Acesse sua conta">
-        <SignupForm setEmail={setEmail} setPassword={setPassword} handleSubmit={handleSubmit} />
+        <SignupForm 
+          setEmail={setEmail} 
+          setPassword={setPassword} 
+          handleSubmit={handleSubmit}
+        />
       </AuthLayout>
     </div>
   );

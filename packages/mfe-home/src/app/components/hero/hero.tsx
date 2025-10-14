@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import './hero.css'
 
 export default function Hero() {
   
@@ -38,3 +39,4 @@ export default function Hero() {
     </section>
   );
 }
+

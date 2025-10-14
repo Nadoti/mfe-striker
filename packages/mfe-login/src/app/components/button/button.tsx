@@ -1,3 +1,5 @@
+import './button.css';
+
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
 
 export const Button: React.FC<ButtonProps> = ({ children, ...props }) => {
@@ -7,3 +9,4 @@ export const Button: React.FC<ButtonProps> = ({ children, ...props }) => {
     </button>
   );
 };
+
