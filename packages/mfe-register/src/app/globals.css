@@ -18,7 +18,7 @@ a {
 }
 
 a:hover {
-  color: #3b82f6; /* azul */
+  color: #3b82f6;
 }
 
 button {
@@ -32,10 +32,6 @@ body {
   color: #f1f1f1;
   font-family: "Inter", sans-serif;
   height: 100vh;
-  padding: 3rem;
-  @media (min-width: 1024px) {
-    padding: 7rem;
-  }
 }
 
 .auth-container {

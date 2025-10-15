@@ -19,7 +19,6 @@ export function IncomeExpenseChart() {
     try {
       setLoading(true);
       
-      // Buscar dados dos últimos 6 meses
       const months = [];
       for (let i = 5; i >= 0; i--) {
         const date = subMonths(new Date(), i);

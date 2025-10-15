@@ -10,7 +10,6 @@ export function Header() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        // Buscar email do localStorage
         const user = getAuthUser();
         if (user?.email) {
             setUserEmail(user.email);

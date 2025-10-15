@@ -18,8 +18,6 @@ export function AuthGuard({ children }: Props) {
     // Verificar autenticação
     const checkAuth = () => {
       // Se não estiver autenticado e estiver tentando acessar dashboard
-      console.log('pathname', pathname);
-      console.log('isAuthenticated', isAuthenticated());
       if (!isAuthenticated() && pathname.startsWith('/dashboard')) {
         router.replace('/login');
         return;

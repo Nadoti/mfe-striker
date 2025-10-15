@@ -1,6 +1,3 @@
-/* ===============================
-   Reset básico
-   =============================== */
 * {
   margin: 0;
   padding: 0;
@@ -21,7 +18,7 @@ a {
 }
 
 a:hover {
-  color: #3b82f6; /* azul */
+  color: #3b82f6;
 }
 
 button {
@@ -116,9 +113,6 @@ button {
   border-color: #3b82f6;
 }
 
-/* ===============================
-   Card de cartão
-   =============================== */
 .card {
   background: linear-gradient(
     90deg,
@@ -217,7 +211,6 @@ button {
   z-index: -1;
 }
 
-/* Blob base */
 .effect-blob {
   position: absolute;
   width: 24rem;
@@ -227,7 +220,6 @@ button {
   animation: pulse-effect 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
-/* Cores dos blobs */
 .effect-blob-blue {
   background-color: rgba(59, 130, 246, 0.2);
 }
@@ -236,7 +228,6 @@ button {
   background-color: rgba(168, 85, 247, 0.2);
 }
 
-/* Posicionamento */
 .effect-blob-top-left {
   top: 25%;
   left: 25%;
@@ -247,12 +238,10 @@ button {
   right: 25%;
 }
 
-/* Animação com delay */
 .effect-blob-delayed {
   animation-delay: 1s;
 }
 
-/* Animação de pulse */
 @keyframes pulse-effect {
   0%, 100% {
     opacity: 1;

@@ -1,78 +1,129 @@
-/* Container principal da navbar */
 .navbar-container {
-    width: 100%;
-    height: 100%;
-    border-right: 1px solid #333334;
+  width: 80px;
+  height: 100vh;
+  border-right: 1px solid #333334;
+  background-color: #121212;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transition: transform 0.3s ease;
 }
 
-/* Conteúdo da navbar */
 .navbar-content {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Navegação */
 .navbar-nav {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 4rem;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 4rem;
 }
 
-/* Menu de navegação */
 .navbar-menu {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 2rem;
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-/* Itens do menu */
 .navbar-menu-item {
-    padding: .75rem;
-    border-radius: 8px;
-    transition: background-color 0.2s;
+  padding: .75rem;
+  border-radius: 8px;
+  transition: background-color 0.2s;
 }
 
 .navbar-menu-item:hover {
-    background-color: #363638;
-    border-radius: 8px;
+  background-color: #363638;
+  border-radius: 8px;
 }
 
 .navbar-menu-item:hover svg {
-    color: #4F46E5 !important;
+  color: #4F46E5 !important;
 }
 
 .navbar-menu-item.active {
-    background-color: #363638;
+  background-color: #363638;
 }
 
-/* Logout */
 .navbar-logout {
-    padding-bottom: 4rem;
+  padding-bottom: 4rem;
 }
 
 .navbar-logout-button {
-    padding: 1rem;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    border-radius: 8px;
-    transition: background-color 0.2s;
+  padding: 1rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.2s;
 }
 
 .navbar-logout-button:hover {
-    background-color: #363638;
+  background-color: #363638;
+}
+
+.navbar-hamburger {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 1000;
+  background: transparent;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  display: none;
+}
+
+@media (min-width: 1024px) {
+    .navbar-container {
+     width: 10rem
+    }
+}
+
+.logo-show-mobile {
+  display: none;
+}
+
+.logo-show-desktop {
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .logo-show-desktop {
+    display: none;
+  }
+  
+  .logo-show-mobile {
+    display: block;
+    margin-top: 3rem; 
+  }
+}
+@media (max-width: 768px) {
+  .navbar-container {
+    transform: translateX(-100%);
+    position: fixed;
+    z-index: 999;
+  }
+
+  .navbar-container.open {
+    transform: translateX(0);
+  }
+
+  .navbar-hamburger {
+    display: block;
+  }
 }

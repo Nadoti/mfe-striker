@@ -2,25 +2,19 @@ import { useState, useEffect, useMemo } from 'react';
 import type { TransactionType } from '@/types/transaction';
 import { INCOME_CATEGORIES, EXPENSE_CATEGORIES } from '@/types/transaction';
 
-/**
- * Hook para sugestões inteligentes de categorias baseadas na descrição
- */
 export function useCategorySuggestions(
   description: string,
   type: TransactionType
 ) {
   const [suggestions, setSuggestions] = useState<string[]>([]);
 
-  // Palavras-chave para cada categoria
   const categoryKeywords = useMemo(() => ({
-    // Receitas
     'Salário': ['salário', 'salario', 'pagamento', 'vencimento', 'folha'],
     'Freelance': ['freelance', 'freela', 'projeto', 'cliente', 'trabalho extra'],
     'Investimentos': ['investimento', 'dividendo', 'ação', 'ações', 'fundo', 'renda fixa', 'cdb', 'tesouro'],
     'Vendas': ['venda', 'vendeu', 'mercado livre', 'olx', 'marketplace'],
     'Aluguel': ['aluguel', 'inquilino', 'locação'],
     
-    // Despesas
     'Alimentação': ['comida', 'almoço', 'jantar', 'café', 'restaurante', 'ifood', 'uber eats', 'delivery', 'supermercado', 'mercado', 'padaria', 'lanche'],
     'Transporte': ['uber', '99', 'taxi', 'gasolina', 'combustível', 'ônibus', 'metrô', 'estacionamento', 'pedágio', 'transporte'],
     'Moradia': ['aluguel', 'condomínio', 'condominio', 'iptu', 'água', 'luz', 'internet', 'energia', 'gás', 'gas'],
@@ -42,14 +36,12 @@ export function useCategorySuggestions(
     
     const matches: Array<{ category: string; score: number }> = [];
 
-    // Buscar correspondências
     categories.forEach((category) => {
       const keywords = categoryKeywords[category as keyof typeof categoryKeywords] || [];
       let score = 0;
 
       keywords.forEach((keyword) => {
         if (descLower.includes(keyword)) {
-          // Pontuação maior se a palavra-chave está no início
           score += descLower.startsWith(keyword) ? 3 : 2;
         }
       });
@@ -59,19 +51,14 @@ export function useCategorySuggestions(
       }
     });
 
-    // Ordenar por pontuação (maior primeiro)
     matches.sort((a, b) => b.score - a.score);
 
-    // Retornar top 3 sugestões
     setSuggestions(matches.slice(0, 3).map((m) => m.category));
   }, [description, type, categoryKeywords]);
 
   return suggestions;
 }
 
-/**
- * Hook para validação avançada de valores
- */
 export function useAmountValidation(amount: number, type: TransactionType) {
   const [warning, setWarning] = useState<string | null>(null);
 
@@ -81,7 +68,6 @@ export function useAmountValidation(amount: number, type: TransactionType) {
       return;
     }
 
-    // Avisos para valores muito altos (possível erro de digitação)
     if (type === 'expense' && amount > 50000) {
       setWarning('⚠️ Valor muito alto para uma despesa. Confirme se está correto.');
     } else if (type === 'income' && amount > 100000) {
@@ -94,9 +80,6 @@ export function useAmountValidation(amount: number, type: TransactionType) {
   return warning;
 }
 
-/**
- * Hook para validação de data
- */
 export function useDateValidation(date: string) {
   const [warning, setWarning] = useState<string | null>(null);
 
@@ -110,11 +93,9 @@ export function useDateValidation(date: string) {
     const today = new Date();
     const diffDays = Math.floor((today.getTime() - selectedDate.getTime()) / (1000 * 60 * 60 * 24));
 
-    // Avisar se a data é futura
     if (diffDays < 0) {
       setWarning('📅 Esta transação está no futuro.');
     } 
-    // Avisar se a data é muito antiga (mais de 1 ano)
     else if (diffDays > 365) {
       setWarning('📅 Esta transação tem mais de 1 ano.');
     } else {
