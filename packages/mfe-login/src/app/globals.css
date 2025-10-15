@@ -51,9 +51,16 @@ body {
     #c0bef1 50%,
     #4f46e5 100%
   );
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-bottom: 2rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.brand:hover {
+  transform: scale(1.05);
 }
 
 .auth-box {

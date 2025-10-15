@@ -78,7 +78,9 @@ export function Register() {
     <GuestGuard>
       <div className="d-flex justify-center align-items-center height-100">
         <div className="auth-container">
-          <h1 className="brand">Blue Bank</h1>
+          <a href="/home" style={{ textDecoration: 'none' }}>
+            <h1 className="brand">Blue Bank</h1>
+          </a>
 
           <div className="auth-box">
             <h2 className="auth-title">Crie sua conta</h2>
