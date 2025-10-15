@@ -1,8 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { supabase } from '@/lib/supabase';
-import { toast } from 'sonner';
+import { useLogoutStore } from '@/store/useLogoutStore';
 import './profile.css';
 
 interface Session {
@@ -14,6 +13,7 @@ interface Session {
 export default function ProfilePage() {
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
+  const { openModal } = useLogoutStore();
 
   useEffect(() => {
     const getSession = () => {
@@ -39,28 +39,6 @@ export default function ProfilePage() {
     
     setLoading(false);
   }, []);
-
-  const handleLogout = async () => {
-    toast.promise(
-      async () => {
-        await supabase.auth.signOut();
-        
-        localStorage.removeItem('auth_session');
-        localStorage.removeItem('auth_user');
-        localStorage.removeItem('auth_token');
-        localStorage.removeItem('auth_refresh_token');
-        
-        await new Promise(resolve => setTimeout(resolve, 500));
-        
-        window.location.href = '/login';
-      },
-      {
-        loading: 'Saindo da conta...',
-        success: 'Logout realizado com sucesso!',
-        error: 'Erro ao fazer logout',
-      }
-    );
-  };
 
   if (loading) {
     return (
@@ -116,7 +94,7 @@ export default function ProfilePage() {
         </div>
 
         <div className="profile-actions">
-          <button className="logout-button" onClick={handleLogout}>
+          <button className="logout-button" onClick={openModal}>
             Sair da Conta
           </button>
         </div>
