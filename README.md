@@ -11,6 +11,7 @@ Antes de rodar o projeto, você precisa configurar o backend:
 1. Acesse [https://supabase.com](https://supabase.com) e crie uma conta
 2. Crie um novo projeto
 3. Aguarde a criação do projeto (pode levar alguns minutos)
+4. Após criacar uma conta na tela de register, o supabase envia um email para confirmação da criacao de conta.
 
 ### 2️⃣ Configurar Variáveis de Ambiente
 
