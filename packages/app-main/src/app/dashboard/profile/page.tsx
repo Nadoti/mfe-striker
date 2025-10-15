@@ -43,19 +43,15 @@ export default function ProfilePage() {
   const handleLogout = async () => {
     toast.promise(
       async () => {
-        // Logout do Supabase
         await supabase.auth.signOut();
         
-        // Limpar localStorage
         localStorage.removeItem('auth_session');
         localStorage.removeItem('auth_user');
         localStorage.removeItem('auth_token');
         localStorage.removeItem('auth_refresh_token');
         
-        // Pequeno delay para mostrar o toast
         await new Promise(resolve => setTimeout(resolve, 500));
         
-        // Redirecionar
         window.location.href = '/login';
       },
       {
