@@ -84,7 +84,7 @@ export default function TransactionsPage() {
     setEditingTransaction(null);
     loadTransactions();
   };
-console.log('transactions', transactions  )
+  
   return (
     <div className="transactions-page">
       <div className="transactions-header">
